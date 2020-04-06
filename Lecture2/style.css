@@ -1,0 +1,20 @@
+body {
+    height: 100vh;
+    background-image: linear-gradient(rgb(92, 65, 0), rgb(150, 76, 160));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+header h1 {
+    font-size: 20px;
+    color: rgb(63, 43, 43);
+}
+
+main p {
+    font-size: 10px;
+    color: rgb(100, 100, 141);
+}
+
+main img {}
