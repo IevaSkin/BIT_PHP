@@ -73,24 +73,36 @@ if (isset($_FILES['image'])) {
 $path = './' . $_GET["path"];
 $files_and_dirs = scandir($path);
 
-print('<h1>Directory contents: ' . str_replace('?path=/', '', $_SERVER["REQUEST_URl"]) . '</h1>');
-print('<table><th>Type</th><th>Name</th><th>Actions</th>');
-foreach ($files_and_dirs as $fnd) {
-   if ($fnd != ".." and $fnd != ".") {
-      print('<tr>');
-      print('<td>' . (is_dir($path . $fnd) ? "Directory" : "File") . '</td>');
-      print('<td>' . (is_dir($path . $fnd)
-         ? '< a href="' . (isset($_GET["path"])
-            ? $_SERVER["REQUEST_URl"] . $fnd . '/'
-            : $_SERVER["REQUEST_URl"] . '?path=' . $fnd . '/') . '">' . $fnd . '<a/>'
-         : $fnd)
-         . '</td>');
-      print('<td></td>');
-      print('</tr>');
-   }
-}
+print('<h2>Directory contents: ' . str_replace('?path=/','',$_SERVER['REQUEST_URI']) . '</h2>');
 
-print("</table>");
+
+print('<table><th>Type</th><th>Name</th><th>Actions</th>');
+foreach ($files_and_dirs as $fnd){
+if ($fnd != ".." and $fnd != ".") {
+   print('<tr>');
+   print('<td>' . (is_dir($path . $fnd) ? "Directory" : "File") . '</td>');
+   print('<td>' . (is_dir($path . $fnd) 
+      ? '<a href="' . (isset($_GET['path']) 
+      ? $_SERVER['REQUEST_URI'] . $fnd . '/' 
+      : $_SERVER['REQUEST_URI'] . '?path=' . $fnd . '/') . '">' . $fnd . '</a>'
+      : $fnd)
+      . '</td>');
+   print('<td>'
+      . (is_dir($path . $fnd) 
+       ? ''
+      : '<form style="display: inline-block" action="" method="post">
+      <input type="hidden" name="delete" value=' . str_replace(' ', '&nbsp;', $fnd) . '>
+      <input type="submit" value="Delete">
+      </form>
+      <form style="display: inline-block" action="" method="post">
+      <input type="hidden" name="download" value=' . str_replace(' ', '&nbsp;', $fnd) . '>
+       </form>'
+      ) 
+      . "</form></td>");
+   print('</tr>');
+      }
+   }
+   print("</table>");
 ?>
 
 <html lang="en">
