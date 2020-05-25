@@ -1,0 +1,12 @@
+{
+    "name": "ieva/composer",
+    "authors": [
+        {
+            "name": "IevaSkin",
+            "email": "60929990+IevaSkin@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "doctrine/orm": "^2.7"
+    }
+}
